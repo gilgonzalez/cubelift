@@ -1,0 +1,19 @@
+---
+import RequestFooter from "./RequestFooter.astro";
+import { getPath, getTranslations } from "../i18n/utils";
+const { lang } = Astro.props;
+const t = getTranslations(lang);
+---
+
+<div class="home-hero">
+  <div class="flex flex-col text-left gap-4">
+    <h3 class="section-title max-w-sm text-white">{t.home.hero_title}</h3>
+    <p class="paragraph max-w-sm text-white">{t.home.hero_description}</p>
+  </div>
+  <div class="mt-24 flex flex-row gap-4 items-center">
+    <a href={getPath("request", lang)} class="btn-request">{t.button.request}</a>
+    <a href="/" class="text-primary font-bold cursor-pointer"> {t.specification_show}</a>
+
+  </div>
+</div>
+<RequestFooter lang={'es'} />

@@ -1,0 +1,23 @@
+---
+const { lang = "es", url } = Astro.props;
+---
+
+<script type="application/ld+json">
+{JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": `${url}#organization`,
+  name: "Vacuum Lift International",
+  url,
+  logo: `${url}/logo.svg`,
+  sameAs: [
+    "https://www.linkedin.com/company/xxx",
+    "https://www.youtube.com/@xxx"
+  ],
+  description:
+    lang === "es"
+      ? "Empresa internacional especializada en la instalación de ascensores por vacío de forma cuadrada."
+      : "International company specialized in the installation of square vacuum elevators.",
+})
+}
+</script>

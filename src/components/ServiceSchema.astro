@@ -1,0 +1,24 @@
+---
+const { lang = "es", url } = Astro.props;
+---
+
+<script type="application/ld+json">
+{JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "@id": `${url}#installation-service`,
+  serviceType:
+    lang === "es"
+      ? "Instalación de ascensores por vacío"
+      : "Vacuum elevator installation",
+  provider: {
+    "@type": "Organization",
+    name: "Vacuum Lift International",
+  },
+  areaServed: {
+    "@type": "Place",
+    name: "Worldwide",
+  },
+})
+}
+</script>

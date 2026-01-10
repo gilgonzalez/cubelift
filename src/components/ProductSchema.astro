@@ -1,0 +1,29 @@
+---
+const { lang = "es", url } = Astro.props;
+---
+
+<script type="application/ld+json">
+{JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "@id": `${url}#vacuum-lift`,
+  name:
+    lang === "es"
+      ? "Ascensor por vacío cuadrado"
+      : "Square Vacuum Elevator",
+  description:
+    lang === "es"
+      ? "Ascensor cuadrado impulsado por tecnología de vacío, eficiente y sin contrapesos."
+      : "Square-shaped elevator powered by vacuum technology, efficient and counterweight-free.",
+  brand: {
+    "@type": "Brand",
+    name: "Vacuum Lift International",
+  },
+  manufacturer: {
+    "@type": "Organization",
+    name: "Vacuum Lift International",
+  },
+  category: "Elevator",
+})
+}
+</script>

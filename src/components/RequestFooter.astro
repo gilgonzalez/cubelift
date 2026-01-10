@@ -1,0 +1,14 @@
+---
+import { getPath, getTranslations } from "../i18n/utils";
+const { lang } = Astro.props;
+const t = getTranslations(lang);
+
+---
+<section class="request-footer">
+  <a href={getPath("home", lang)}>
+    <img src="/brand/logo.png" alt="Logo" class="h-10 w-auto" />
+  </a>
+  <h3 class="section-title text-white text-center text-pretty  max-w-sm ">{t.footer.title}</h3>
+  <p class="paragraph text-white text-center text-pretty  max-w-2xl ">{t.footer.description}</p>
+  <a href={getPath("request", lang)} class="btn-request">{t.button.request}</a>
+</section>
