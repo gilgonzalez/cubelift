@@ -1,0 +1,123 @@
+---
+import { Image } from 'astro:assets';
+
+interface Props {
+  images: ImageMetadata[];
+}
+
+const { images } = Astro.props;
+---
+
+<div class="slider-component w-full flex flex-col gap-6 max-w-lg mx-auto lg:max-w-none">
+  <div class="slider-wrapper relative w-full aspect-4/5 lg:aspect-square overflow-hidden bg-gray-50">
+    {images.map((img, index) => (
+      <div 
+        class={`slide absolute inset-0 w-full h-full transition-opacity duration-500 ease-in-out ${index === 0 ? 'opacity-100 z-10' : 'opacity-0 z-0'}`} 
+        data-index={index}
+      >
+        <Image src={img} alt={`Slide ${index + 1}`} class="w-full h-full object-cover" />
+      </div>
+    ))}
+  </div>
+
+  <div class="slider-controls flex items-center justify-between px-2">
+    <button class="prev-btn p-2 cursor-pointer text-gray-400 hover:text-black transition-colors" aria-label="Previous slide">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m15 18-6-6 6-6"/>
+      </svg>
+    </button>
+
+    <div class="dots flex gap-3">
+      {images.map((_, index) => (
+        <button 
+          class="dot w-3 h-3 rounded-full transition-colors duration-300 data-[active=true]:bg-[var(--color-primary)] data-[active=false]:bg-gray-200 data-[active=false]:hover:bg-gray-300" 
+          data-index={index}
+          data-active={index === 0 ? 'true' : 'false'}
+          aria-label={`Go to slide ${index + 1}`}
+        ></button>
+      ))}
+    </div>
+
+    <button class="next-btn p-2 cursor-pointer text-gray-400 hover:text-black transition-colors" aria-label="Next slide">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m9 18 6-6-6-6"/>
+      </svg>
+    </button>
+  </div>
+</div>
+
+<script>
+  class ImageSlider {
+    container: HTMLElement;
+    slides: NodeListOf<HTMLElement>;
+    dots: NodeListOf<HTMLElement>;
+    prevBtn: HTMLElement | null;
+    nextBtn: HTMLElement | null;
+    currentIndex: number;
+
+    constructor(element: HTMLElement) {
+      this.container = element;
+      this.slides = element.querySelectorAll('.slide');
+      this.dots = element.querySelectorAll('.dot');
+      this.prevBtn = element.querySelector('.prev-btn');
+      this.nextBtn = element.querySelector('.next-btn');
+      this.currentIndex = 0;
+
+      this.init();
+    }
+
+    init() {
+      this.prevBtn?.addEventListener('click', () => this.prevSlide());
+      this.nextBtn?.addEventListener('click', () => this.nextSlide());
+
+      this.dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => this.goToSlide(index));
+      });
+    }
+
+    updateClasses() {
+      // Update slides
+      this.slides.forEach((slide, index) => {
+        if (index === this.currentIndex) {
+          slide.classList.remove('opacity-0', 'z-0');
+          slide.classList.add('opacity-100', 'z-10');
+        } else {
+          slide.classList.remove('opacity-100', 'z-10');
+          slide.classList.add('opacity-0', 'z-0');
+        }
+      });
+
+      // Update dots
+      this.dots.forEach((dot, index) => {
+        dot.setAttribute('data-active', index === this.currentIndex ? 'true' : 'false');
+      });
+    }
+
+    prevSlide() {
+      this.currentIndex = (this.currentIndex - 1 + this.slides.length) % this.slides.length;
+      this.updateClasses();
+    }
+
+    nextSlide() {
+      this.currentIndex = (this.currentIndex + 1) % this.slides.length;
+      this.updateClasses();
+    }
+
+    goToSlide(index: number) {
+      this.currentIndex = index;
+      this.updateClasses();
+    }
+  }
+
+  // Initialize all sliders on the page
+  document.addEventListener('astro:page-load', () => {
+    document.querySelectorAll('.slider-component').forEach(el => {
+      new ImageSlider(el as HTMLElement);
+    });
+  });
+
+  // Fallback for initial load if View Transitions aren't used or behave differently
+  document.querySelectorAll('.slider-component').forEach(el => {
+    new ImageSlider(el as HTMLElement);
+  });
+</script>

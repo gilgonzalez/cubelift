@@ -1,0 +1,68 @@
+---
+import { getPath, getTranslations } from "../i18n/utils";
+import Facebook from "./Facebook.astro";
+import Instagram from "./Instagram.astro";
+import Youtube from "./Youtube.astro";
+
+const { lang } = Astro.props;
+const t = getTranslations(lang);
+
+---
+
+<section class="px-18 py-4 bg-black">
+  <div class="border-t border-primary flex flex-col gap-4 py-4">
+    <div class="w-full">
+      <img src="/brand/logo.png" alt="Logo" class="h-10 w-auto" />
+    </div>
+    <div class="w-full flex flex-col gap-8 md:flex-row md:gap-12 md:items-center">
+      <div class="flex flex-col flex-2">
+        <a class="footer-nav" href={getPath("product", lang)}>{t.navbar.product}</a>
+        <a class="footer-nav" href={getPath("about", lang)}>{t.navbar.about}</a>
+        <a class="footer-nav" href={getPath("blog", lang)}>{t.navbar.blog}</a>
+        <a class="footer-nav" href={getPath("request", lang)}>{t.navbar.request}</a>
+        <div class="flex flex-row gap-3 mt-8">
+          <a href="#" aria-label="YouTube" class="text-white hover:text-primary transition-colors">
+            <Youtube />
+          </a>
+          <a href="#" aria-label="Instagram" class="text-white hover:text-primary transition-colors">
+            <Instagram />
+          </a>
+          <a href="#" aria-label="Facebook" class="text-white hover:text-primary transition-colors">
+            <Facebook />
+          </a>
+        </div>
+      </div>
+      <div class="flex flex-col gap-8 text-white flex-3">
+        <p class="text-lg font-bold">{t.navbar.contact}</p>
+        <div class="flex flex-col gap-4 md:flex-row md:justify-between">
+          <div class="flex flex-col">
+            <p>C/ Primavera 19</p>
+            <p>28850 Torrejón de Ardoz,</p>
+            <p>Madrid, España.</p>
+          </div>
+          <div class="flex flex-col">
+            <p>+34 91 886 75 39</p>
+            <p>638 01 62 67</p>
+            <p>info@vacuumelevators.eu</p>
+          </div>
+        </div>
+        
+      </div>
+      <form id="form" class="flex flex-col text-white flex-4">  
+        <input type="text" placeholder={t.form.name} class="input-dark" />
+        <input type="text" placeholder={t.form.email} class="input-dark" />
+        <input type="text" placeholder={t.form.phone} class="input-dark" />
+        <input type="text" placeholder={t.form.message} class="input-dark" />
+        <div class="flex flex-col md:flex-row gap-4 mt-4 md:items-center">
+          <button type="submit" class="btn-submit">{t.form.submit}</button>
+          <input type="checkbox" id="checkbox" class="checkbox-input-dark">
+          <label for="checkbox">{t.form.read_accept} <a href="" class="underline">{t.form.legal_notice}</a> {t.form.and} <a href="" class="underline">{t.form.privacy_policy}</a></label>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="flex flex-col text-white gap-4">
+    <p class="text-balance text-xs font-light">Copyright © 2025 Pneumatic Vacuum Elevators, LLC</p>
+    <p class="text-xs font-light text-balance">Cube Lifts are designed as residential elevators and are not ADA compliant. Actual product may vary from images and renderings shown or descriptions provided. Variations in color, finish, features, or specifications may occur due to ongoing improvements, customization options, or display differences. Final delivered product may differ slightly from what is advertised.</p>
+  </div>
+</section>

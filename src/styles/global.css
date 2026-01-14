@@ -2,9 +2,11 @@
 
 
 @theme {
-  --color-primary: oklch(84% 0.21 96);
+  --color-primary: oklch(from #EABC67 l c h);
   --background-footer: linear-gradient(to right, rgba(0,0,0,0.25), black 40%), url('/src/assets/footer/footer-bg-1.png');
   --background-home-hero: linear-gradient(to left, transparent, black 95%), url('/src/assets/home/home-bg-1.png');
+  --background-product-hero: linear-gradient(to left, transparent, black 95%), url('/src/assets/product/product-bg-1.png');
+  --background-about-hero: linear-gradient(to bottom, transparent, black 99%), url('/src/assets/about/about-bg-1.png');
 }
 
 html,
@@ -33,15 +35,29 @@ body {
   background-image: var(--background-home-hero);
   @apply bg-cover bg-center h-[calc(100vh-80px)] flex flex-col justify-end items-start gap-8 p-18;
 }
+.product-hero {
+  background-image: var(--background-product-hero);
+  @apply bg-cover bg-center h-[calc(100vh-80px)] flex flex-col justify-end items-start gap-8 p-18;
+}
+.about-hero {
+  background-image: var(--background-about-hero);
+  @apply bg-cover bg-center h-[calc(100vh-70px)] flex flex-col justify-center items-center ;
+}
 .request-footer {
   background-image: var(--background-footer);
-  @apply bg-contain bg-left bg-no-repeat h-[400px] flex flex-col justify-center items-center gap-8;
+  @apply bg-cover bg-center bg-no-repeat flex flex-col justify-center items-center gap-8 px-6 py-12 md:px-18 md:py-20 min-h-[420px] md:min-h-[480px];
 }
 .section-title {
   @apply text-4xl font-semibold;
 }
 .paragraph {
   @apply text-xl font-light;
+}
+.btn-primary {
+  @apply bg-primary px-12 py-4 text-black font-medium;
+}
+.btn-download {
+  @apply bg-transparent border max-w-fit border-black px-16 py-2 text-black font-medium mt-8;
 }
 .btn-request {
   @apply border-primary border-2 px-8 py-2 text-white font-medium bg-transparent;
@@ -74,5 +90,134 @@ body {
 
 .btn-request:hover::before {
   transform: skewX(-12deg) scaleX(1);
+}
+
+.btn-about {
+  @apply bg-primary  px-8 py-2 text-black font-light;
+}
+.btn-submit {
+  @apply bg-primary px-12 py-2 flex items-center justify-center text-black font-light cursor-pointer transition-all duration-300 hover:bg-primary/70 hover:text-white ;
+}
+.footer-nav {
+  @apply text-white font-light;
+}
+
+.input-dark{
+  @apply w-full bg-transparent text-white text-sm md:text-base border-0 border-b border-white outline-none py-2;
+}
+
+.input-dark::placeholder{
+  @apply text-white;
+}
+
+.input-dark:-webkit-autofill,
+.input-dark:-webkit-autofill:hover,
+.input-dark:-webkit-autofill:focus,
+.input-dark:-webkit-autofill:active {
+  -webkit-text-fill-color: #ffffff !important;
+  caret-color: #ffffff;
+  transition: background-color 9999s ease-out 0s;
+}
+
+.input-dark::-ms-reveal,
+.input-dark::-ms-clear{
+  display: none;
+}
+
+.input-light {
+  @apply w-full bg-transparent text-black text-sm md:text-base border-0 border-b border-black outline-none py-2;
+}
+
+.input-light::placeholder {
+  @apply text-black/60;
+}
+
+.input-light:-webkit-autofill,
+.input-light:-webkit-autofill:hover,
+.input-light:-webkit-autofill:focus,
+.input-light:-webkit-autofill:active {
+  -webkit-text-fill-color: #000000 !important;
+  caret-color: #000000;
+  transition: background-color 9999s ease-out 0s;
+}
+
+.input-light::-ms-reveal,
+.input-light::-ms-clear {
+  display: none;
+}
+
+.input-search {
+  @apply w-full bg-transparent text-black text-sm md:text-base border-b border-black/20  outline-none py-2 pl-10 pr-4;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='black'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M21 21l-4.35-4.35m0 0A7.5 7.5 0 105.25 5.25a7.5 7.5 0 0011.4 11.4z' /%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: 0.75rem 50%;
+  background-size: 1rem 1rem;
+}
+
+.input-search::placeholder {
+  @apply text-black/60;
+}
+
+.input-search:-webkit-autofill,
+.input-search:-webkit-autofill:hover,
+.input-search:-webkit-autofill:focus,
+.input-search:-webkit-autofill:active {
+  -webkit-text-fill-color: #000000 !important;
+  caret-color: #000000;
+  transition: background-color 9999s ease-out 0s;
+}
+
+.input-search::-ms-reveal,
+.input-search::-ms-clear {
+  display: none;
+}
+
+.checkbox-input-dark,
+.checkbox-input-light {
+  @apply appearance-none w-5 h-5 border border-current cursor-pointer flex items-center justify-center shrink-0;
+}
+
+.checkbox-input-dark {
+  @apply border-white;
+}
+
+.checkbox-input-dark:checked::before {
+  content: "✕";
+  @apply text-white text-xs font-bold leading-none;
+}
+
+.checkbox-input-light {
+  @apply border-black;
+}
+
+.checkbox-input-light:checked::before {
+  content: "✕";
+  @apply text-black text-xs font-bold leading-none;
+}
+
+.radio-input-dark,
+.radio-input-light {
+  @apply appearance-none w-5 h-5 border border-current cursor-pointer flex items-center justify-center shrink-0;
+}
+
+.radio-input-dark {
+  @apply border-white;
+}
+
+.radio-input-dark:checked::before {
+  content: "✕";
+  @apply text-white text-xs font-bold leading-none;
+}
+
+.radio-input-light {
+  @apply border-black;
+}
+
+.radio-input-light:checked::before {
+  content: "✕";
+  @apply text-black text-xs font-bold leading-none;
+}
+.btn-blog-filter {
+  @apply bg-transparent border border-black px-4 py-2 text-black font-light;
 }
 

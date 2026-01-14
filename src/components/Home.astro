@@ -1,11 +1,65 @@
 ---
+import { Image } from "astro:assets";
+import homeImg1 from "../assets/home/home-img-1.jpg";
+import homeImg2 from "../assets/home/home-img-2.png";
+import homeBg2 from "../assets/home/home-bg-2.png";
+import sliderImg1 from "../assets/slider/slider-1.png";
+import ImageSlider from "./ImageSlider.astro";
 import RequestFooter from "./RequestFooter.astro";
 import { getPath, getTranslations } from "../i18n/utils";
+import AdvantageItem from "./AdvantageItem.astro";
+
+interface Props {
+  lang : "es" | "en"
+}
+
 const { lang } = Astro.props;
 const t = getTranslations(lang);
+
+const advantageItems = [
+  {
+    title: t.advantages.item_1.title,
+    description: t.advantages.item_1.description,
+    icon: "/ui/icon-1.svg"
+  },
+  {
+    title: t.advantages.item_2.title,
+    description: t.advantages.item_2.description,
+    icon: "/ui/icon-2.svg"
+  },
+  {
+    title: t.advantages.item_3.title,
+    description: t.advantages.item_3.description,
+    icon: "/ui/icon-3.svg"
+  },
+  {
+    title: t.advantages.item_4.title,
+    description: t.advantages.item_4.description,
+    icon: "/ui/icon-4.svg"
+  },
+  {
+    title: t.advantages.item_5.title,
+    description: t.advantages.item_5.description,
+    icon: "/ui/icon-5.svg"
+  },
+  {
+    title: t.advantages.item_6.title,
+    description: t.advantages.item_6.description,
+    icon: "/ui/icon-6.svg"
+  },
+]
+const featureItems = [
+  t.features.item_1,
+  t.features.item_2,
+  t.features.item_3,
+  t.features.item_4,
+  t.features.item_5,
+  t.features.item_6,
+  t.features.item_7,
+]
 ---
 
-<div class="home-hero">
+<section id="hero" class="home-hero">
   <div class="flex flex-col text-left gap-4">
     <h3 class="section-title max-w-sm text-white">{t.home.hero_title}</h3>
     <p class="paragraph max-w-sm text-white">{t.home.hero_description}</p>
@@ -15,5 +69,61 @@ const t = getTranslations(lang);
     <a href="/" class="text-primary font-bold cursor-pointer"> {t.specification_show}</a>
 
   </div>
-</div>
-<RequestFooter lang={'es'} />
+</section>
+<section id="section-1" class="bg-white relative px-6 py-16 lg:px-18 lg:py-24">
+  <div class="flex flex-col justify-start items-center gap-6 max-w-2xl mx-auto lg:mx-0 lg:items-start">
+    <h3 class="section-title text-black">{t.home.section_1_title}</h3>
+    <p class="paragraph text-black">{t.home.section_1_paragraph_1}</p>
+    <p class="paragraph text-black">{t.home.section_1_paragraph_2}</p>
+    <div class="w-full mt-8 lg:hidden">
+      <Image src={homeImg1} alt="Home Image 1" class="w-full h-auto object-contain" />
+    </div>
+  </div>
+  <div class="hidden lg:block">
+    <Image src={homeImg1} alt="Home Image 1" class="w-lg absolute -top-24 right-24" />
+  </div>
+</section>
+<section id="advantages" class="bg-black flex flex-col justify-center items-center gap-8 p-18">
+  <h3 class="section-title text-white max-w-2xl text-center text-pretty uppercase">{t.advantages.title}</h3>
+  <div class="flex flex-wrap gap-8 justify-center">
+    {advantageItems.map((item) => (
+      <AdvantageItem {...item} />
+    ))}
+  </div>
+</section>
+<section id="features" class="flex flex-col lg:flex-row px-12 py-12 lg:p-0 lg:pl-18 w-full min-h-screen lg:h-screen bg-[linear-gradient(to_bottom,var(--color-primary)_80%,white_80%)] relative ">
+  <div class="flex flex-col flex-1 items-start justify-center gap-8 ">
+    <h3 class="section-title text-black max-w-2xl text-pretty uppercase">{t.features.title}</h3>
+    <ul class="flex flex-col gap-4">
+      {featureItems.map((item) => (
+        <li class="text-black text-xl tracking-wide font-light flex items-center justify-start gap-4">
+          <span class="w-2 h-2 bg-black shrink-0"></span>
+          {item}
+        </li>
+      ))}
+    </ul>
+  <div class="absolute bottom-12">
+    <a class="btn-primary" href="#">{t.specification_show_all}</a>
+  </div>
+  </div>
+  <div class="flex flex-1 h-64 lg:h-full w-full py-4">
+    <Image src={homeImg2} alt="Home Image 2" class="w-full h-full object-contain" />
+  </div>
+</section>
+<section id="section-2" class="flex flex-col lg:flex-row px-6 py-12 lg:px-20 lg:py-24 bg-white gap-12 items-center justify-center w-full">
+  <div id="slider" class="w-full lg:flex-3 max-w-xl lg:max-w-none mx-auto">
+    <ImageSlider images={[sliderImg1, homeImg1, homeImg2, sliderImg1, homeImg1, homeImg2, sliderImg1, homeImg1, homeImg2]} />
+  </div>
+  <div class="flex flex-col w-full lg:flex-2 gap-6 justify-center items-start">
+    <h3 class="section-title text-black text-3xl md:text-4xl">{t.home.section_2_title}</h3>
+    <p class="paragraph text-black text-base md:text-lg text-pretty leading-relaxed">{t.home.section_2_description}</p>
+  </div>
+</section>
+<section id="section-3" class="flex flex-col md:flex-row px-6 md:px-18 py-16 md:py-24 bg-cover bg-center gap-8 items-stretch md:items-end" style={`background-image: url(${homeBg2.src})`}>
+  <div class="bg-primary p-6 md:p-8 max-w-lg flex flex-col gap-6 md:gap-8">
+    <h3 class="section-title text-black text-3xl md:text-4xl max-w-72">{t.home.section_3_title}</h3>
+    <p class="paragraph text-black text-base md:text-lg text-pretty leading-relaxed">{t.home.section_3_description}</p>
+  </div>
+  <div class="mt-8 md:mt-0 aspect-square bg-primary h-16 md:h-20" />
+</section>
+<RequestFooter lang={lang} />

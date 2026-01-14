@@ -1,0 +1,54 @@
+---
+import { routes } from "../i18n/routes";
+import { getPath } from "../i18n/utils";
+
+interface Props {
+  lang: string;
+  class?: string;
+}
+
+const { lang, class: className } = Astro.props;
+const currentPath = Astro.url.pathname;
+
+const supportedLanguages = [
+  { code: "es", label: "ES" },
+  { code: "en", label: "EN" },
+  // Add more languages here in the future
+];
+
+const normalizePath = (path: string) => path.replace(/\/$/, "") || "/";
+
+// Find current route key to maintain the same page when switching languages
+let currentRouteKey: keyof typeof routes = "home"; 
+for (const [key, _] of Object.entries(routes)) {
+    // Check against current language to identify the route key
+    const pathForKey = getPath(key as keyof typeof routes, lang as "es" | "en");
+    if (normalizePath(pathForKey) === normalizePath(currentPath)) {
+        currentRouteKey = key as keyof typeof routes;
+        break;
+    }
+}
+---
+
+<div class={`relative inline-block text-left group ${className}`}>
+  <button type="button" class="font-medium text-white hover:text-primary transition-colors uppercase flex items-center gap-1 cursor-pointer">
+    {lang}
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:rotate-180 transition-transform duration-200">
+      <path d="m6 9 6 6 6-6"/>
+    </svg>
+  </button>
+  
+  <div class="absolute right-0 mt-2 w-20 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform origin-top-right z-50">
+    <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+      {supportedLanguages.map((l) => (
+        <a
+          href={getPath(currentRouteKey, l.code as "es" | "en")}
+          class={`block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 ${lang === l.code ? 'font-bold bg-gray-50' : ''}`}
+          role="menuitem"
+        >
+          {l.label}
+        </a>
+      ))}
+    </div>
+  </div>
+</div>

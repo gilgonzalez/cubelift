@@ -1,0 +1,119 @@
+---
+import { Image } from "astro:assets";
+
+interface Props {
+  images: ImageMetadata[];
+}
+
+const { images } = Astro.props;
+---
+
+<div class="carousel-slider w-full h-full flex flex-col gap-6">
+  <div class="relative w-full flex-1 h-full overflow-hidden flex justify-center items-center">
+    {images.map((img, index) => (
+      <div
+        class="carousel-slide absolute w-[80%] max-w-4xl h-full overflow-hidden transition-all duration-500 ease-in-out origin-center
+               data-[position=center]:z-20 data-[position=center]:opacity-100 data-[position=center]:scale-100 data-[position=center]:translate-x-0
+               data-[position=center]:pointer-events-auto data-[position=center]:shadow-xl data-[position=center]:ring-1 data-[position=center]:ring-black/15 data-[position=center]:rounded-lg
+               data-[position=prev]:z-10 data-[position=prev]:opacity-70 data-[position=prev]:scale-90 data-[position=prev]:-translate-x-[55%] data-[position=prev]:blur-[1px]
+               data-[position=next]:z-10 data-[position=next]:opacity-70 data-[position=next]:scale-90 data-[position=next]:translate-x-[55%] data-[position=next]:blur-[1px]
+               data-[position=hidden]:opacity-0 data-[position=hidden]:scale-75 data-[position=hidden]:pointer-events-none"
+        data-index={index}
+        data-position={
+          index === 0
+            ? "center"
+            : index === 1
+            ? "next"
+            : index === images.length - 1
+            ? "prev"
+            : "hidden"
+        }
+      >
+        <Image
+          src={img}
+          alt={`Slide ${index + 1}`}
+          class="w-full h-full object-cover"
+        />
+      </div>
+    ))}
+  </div>
+
+  <div class="flex items-center justify-center gap-3">
+    {images.map((_, index) => (
+      <button
+        class="carousel-dot w-3 h-3 rounded-full transition-colors duration-300
+               data-[active=true]:bg-primary
+               data-[active=false]:bg-gray-200 data-[active=false]:hover:bg-gray-300"
+        data-index={index}
+        data-active={index === 0 ? "true" : "false"}
+        aria-label={`Go to slide ${index + 1}`}
+      ></button>
+    ))}
+  </div>
+</div>
+
+<script>
+  class CarouselSlider {
+    container: HTMLElement;
+    slides: NodeListOf<HTMLElement>;
+    dots: NodeListOf<HTMLElement>;
+    currentIndex: number;
+
+    constructor(element: HTMLElement) {
+      this.container = element;
+      this.slides = element.querySelectorAll(".carousel-slide");
+      this.dots = element.querySelectorAll(".carousel-dot");
+      this.currentIndex = 0;
+
+      this.init();
+      this.updatePositions();
+    }
+
+    init() {
+      this.dots.forEach((dot, index) => {
+        dot.addEventListener("click", () => this.goToSlide(index));
+      });
+    }
+
+    updatePositions() {
+      const total = this.slides.length;
+      const prevIndex = (this.currentIndex - 1 + total) % total;
+      const nextIndex = (this.currentIndex + 1) % total;
+
+      this.slides.forEach((slide, index) => {
+        if (index === this.currentIndex) {
+          slide.dataset.position = "center";
+        } else if (index === prevIndex) {
+          slide.dataset.position = "prev";
+        } else if (index === nextIndex) {
+          slide.dataset.position = "next";
+        } else {
+          slide.dataset.position = "hidden";
+        }
+      });
+
+      this.dots.forEach((dot, index) => {
+        dot.setAttribute(
+          "data-active",
+          index === this.currentIndex ? "true" : "false"
+        );
+      });
+    }
+
+    goToSlide(index: number) {
+      this.currentIndex = index;
+      this.updatePositions();
+    }
+  }
+
+  function initCarouselSliders() {
+    document.querySelectorAll(".carousel-slider").forEach((el) => {
+      if (el.getAttribute("data-carousel-initialized") === "true") return;
+      new CarouselSlider(el as HTMLElement);
+      el.setAttribute("data-carousel-initialized", "true");
+    });
+  }
+
+  initCarouselSliders();
+  document.addEventListener("astro:page-load", initCarouselSliders);
+</script>

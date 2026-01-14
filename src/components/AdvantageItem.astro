@@ -1,0 +1,13 @@
+---
+const {title, description, icon} = Astro.props;
+---
+
+<div class="flex flex-col items-center justify-start  p-4 max-w-sm gap-8">
+  <div class="aspect-square shrink-0 flex w-24 items-center justify-center ">
+    <img src={icon} alt={title} class="w-full h-full object-contain" />
+  </div>
+  <div class="flex flex-col items-center justify-center gap-2 flex-1">
+    <h4 class="font-bold text-xl text-center text-pretty text-white max-w-64 flex-1 flex justify-center items-center">{title}</h4>
+    <p class="text-sm font-light text-white text-center text-pretty  max-w-2xl flex-1">{description}</p>
+  </div>
+</div>

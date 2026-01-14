@@ -1,6 +1,7 @@
 ---
 import { getPath, getTranslations } from "../i18n/utils";
 import { routes } from "../i18n/routes";
+import LanguageSelector from "./LanguageSelector.astro";
 
 const { lang } = Astro.props;
 const t = getTranslations(lang);
@@ -36,6 +37,7 @@ const links = (Object.keys(routes) as Array<keyof typeof routes>).map((key) => (
         </a>
       ))
     }
+    <LanguageSelector lang={lang} />
   </div>
 
   <!-- Mobile Hamburger Button -->
@@ -74,6 +76,7 @@ const links = (Object.keys(routes) as Array<keyof typeof routes>).map((key) => (
         </a>
       ))
     }
+    <LanguageSelector lang={lang}  />
   </div>
 </nav>
 

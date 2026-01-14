@@ -1,0 +1,79 @@
+---
+import { getTranslations } from '../i18n/utils';
+
+interface Props {
+  lang: "es" | "en";
+}
+
+const { lang } = Astro.props;
+const t = getTranslations(lang);
+---
+<section class="bg-primary px-18 py-8 flex justify-start">
+  <h2 class="text-5xl text-left text-black uppercase leading-16 max-w-72">{t.navbar.request}</h2>
+</section>
+<section class="bg-white p-18">
+  <form action="" class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+    <input type="text" placeholder={`${t.form.name} *`} class="input-light" />
+    <input type="text" placeholder={`${t.form.surname} *`} class="input-light" />
+    <input type="text" placeholder={`${t.form.email} *`} class="input-light" />
+    <input type="text" placeholder={`${t.form.phone} *`} class="input-light" />
+    <input type="text" placeholder={`${t.form.country} *`} class="input-light" />
+    <input type="text" placeholder={`${t.form.province} *`} class="input-light" />
+
+    <fieldset class="md:col-span-1 flex flex-col gap-4">
+      <legend class="text-lg font-light text-black mb-4">{t.form.installation_type.label}</legend>
+      <label class="flex items-center gap-2 text-sm text-black">
+        <input type="radio" name="installation_type" value="item_1" class="radio-input-light" />
+        <span class="text-base font-light">{t.form.installation_type.item_1}</span>
+      </label>
+      <label class="flex items-center gap-2 text-sm text-black">
+        <input type="radio" name="installation_type" value="item_2" class="radio-input-light" />
+        <span class="text-base font-light">{t.form.installation_type.item_2}</span>
+      </label>
+      <label class="flex items-center gap-2 text-sm text-black">
+        <input type="radio" name="installation_type" value="item_3" class="radio-input-light" />
+        <span class="text-base font-light">{t.form.installation_type.item_3}</span>
+      </label>
+      <label class="flex items-center gap-2 text-sm text-black">
+        <input type="radio" name="installation_type" value="item_4" class="radio-input-light" />
+        <span class="text-base font-light">{t.form.installation_type.item_4}</span>
+      </label>
+      <label class="flex items-center gap-2 text-sm text-black">
+        <input type="radio" name="installation_type" value="item_5" class="radio-input-light" />
+        <span class="text-base font-light">{t.form.installation_type.item_5}</span>
+      </label>
+    </fieldset>
+
+    <fieldset class="md:col-span-1 flex flex-col gap-4">
+      <legend class="text-lg font-light text-black mb-4">{t.form.floor_quantity}</legend>
+      <label class="flex items-center gap-2 text-sm text-black">
+        <input type="radio" name="floor_quantity" value="1" class="radio-input-light" />
+        <span class="text-base font-light">1</span>
+      </label>
+      <label class="flex items-center gap-2 text-sm text-black">
+        <input type="radio" name="floor_quantity" value="2" class="radio-input-light" />
+        <span class="text-base font-light">2</span>
+      </label>
+      <label class="flex items-center gap-2 text-sm text-black">
+        <input type="radio" name="floor_quantity" value="3" class="radio-input-light" />
+        <span class="text-base font-light">3</span>
+      </label>
+      <label class="flex items-center gap-2 text-sm text-black">
+        <input type="radio" name="floor_quantity" value="4" class="radio-input-light" />
+        <span class="text-base font-light">4</span>
+      </label>
+      <label class="flex items-center gap-2 text-sm text-black">
+        <input type="radio" name="floor_quantity" value=">5" class="radio-input-light" />
+        <span class="text-base font-light">{t.form.more_than_5}</span>
+      </label>
+    </fieldset>
+    <input type="text" placeholder={`${t.form.message} *`} class="input-light md:col-span-2" />
+    <div class="md:col-span-2">
+      <label class="flex items-center gap-2 text-sm text-black">
+        <input type="checkbox" name="legal_notice" class="checkbox-input-light" />
+        <span class="text-base font-light">{t.form.read_accept} <span class="underline">{t.form.legal_notice}</span> {t.form.and} <span class="underline">{t.form.privacy_policy}</span></span>
+      </label>
+    </div>
+    <button type="submit" class="btn-primary w-fit">{t.form.submit}</button>
+  </form>
+</section>

@@ -1,0 +1,334 @@
+---
+import { Image } from "astro:assets";
+import productImg1 from "../assets/product/product-img-1.png";
+import productImg2 from "../assets/product/product-img-2.png";
+import productImg3 from "../assets/product/product-bg-1.png";
+import RequestFooter from "./RequestFooter.astro";
+import { getPath, getTranslations } from "../i18n/utils";
+import AdvantageItem from "./AdvantageItem.astro";
+import FullImageSlider from "./FullImageSlider.astro";
+
+interface Props {
+  lang: "en" | "es"
+}
+
+const { lang } = Astro.props;
+const t = getTranslations(lang);
+
+const advantageItems = [
+  {
+    title: t.advantages.item_1.title,
+    description: t.advantages.item_1.description,
+    icon: "/ui/icon-1.svg",
+  },
+  {
+    title: t.advantages.item_2.title,
+    description: t.advantages.item_2.description,
+    icon: "/ui/icon-2.svg",
+  },
+  {
+    title: t.advantages.item_3.title,
+    description: t.advantages.item_3.description,
+    icon: "/ui/icon-3.svg",
+  },
+  {
+    title: t.advantages.item_4.title,
+    description: t.advantages.item_4.description,
+    icon: "/ui/icon-4.svg",
+  },
+  {
+    title: t.advantages.item_5.title,
+    description: t.advantages.item_5.description,
+    icon: "/ui/icon-5.svg",
+  },
+  {
+    title: t.advantages.item_6.title,
+    description: t.advantages.item_6.description,
+    icon: "/ui/icon-6.svg",
+  },
+];
+const specifications = [
+  {
+    title: t.specifications.specification_1.title,
+    items: [
+      t.specifications.specification_1.item_1,
+      t.specifications.specification_1.item_2,
+      t.specifications.specification_1.item_3,
+      t.specifications.specification_1.item_4,
+    ],
+  },
+  {
+    title: t.specifications.specification_2.title,
+    items: [
+      t.specifications.specification_2.item_1,
+      t.specifications.specification_2.item_2,
+      t.specifications.specification_2.item_3,
+    ],
+  },
+  {
+    title: t.specifications.specification_3.title,
+    items: [
+      t.specifications.specification_3.item_1,
+      t.specifications.specification_3.item_2,
+      t.specifications.specification_3.item_3,
+      t.specifications.specification_3.item_4,
+    ],
+  },
+  {
+    title: t.specifications.specification_4.title,
+    items: [
+      t.specifications.specification_4.item_1,
+      t.specifications.specification_4.item_2,
+    ],
+  },
+  {
+    title: t.specifications.specification_5.title,
+    items: [
+      t.specifications.specification_5.item_1,
+      t.specifications.specification_5.item_2,
+    ],
+  },
+  {
+    title: t.specifications.specification_6.title,
+    items: [
+      t.specifications.specification_6.item_1,
+      t.specifications.specification_6.item_2,
+    ],
+  },
+];
+const stepsInstallation = [
+  {
+    title: t.product.items.item_1_title,
+    paragraph: t.product.items.item_1_paragraph,
+  },
+  {
+    title: t.product.items.item_2_title,
+    paragraph: t.product.items.item_2_paragraph,
+  },
+  {
+    title: t.product.items.item_3_title,
+    paragraph: t.product.items.item_3_paragraph,
+  },
+  {
+    title: t.product.items.item_4_title,
+    paragraph: t.product.items.item_4_paragraph,
+  },
+  {
+    title: t.product.items.item_5_title,
+    paragraph: t.product.items.item_5_paragraph,
+  },
+  {
+    title: t.product.items.item_6_title,
+    paragraph: t.product.items.item_6_paragraph,
+  },
+];
+const sliderImages = [
+  productImg1,
+  productImg2,
+  productImg3,
+  productImg1,
+  productImg2,
+  productImg3,
+  productImg1,
+  productImg2,
+  productImg3,
+];
+const faqs = [
+  {
+    answer: t.faqs.item_1.answer,
+    question: t.faqs.item_1.question,
+  },
+  {
+    answer: t.faqs.item_2.answer,
+    question: t.faqs.item_2.question,
+  },
+  {
+    answer: t.faqs.item_3.answer,
+    question: t.faqs.item_3.question,
+  },
+  {
+    answer: t.faqs.item_4.answer,
+    question: t.faqs.item_4.question,
+  },
+  {
+    answer: t.faqs.item_5.answer,
+    question: t.faqs.item_5.question,
+  },
+  {
+    answer: t.faqs.item_6.answer,
+    question: t.faqs.item_6.question,
+  }
+]
+---
+
+<section id="hero" class="product-hero">
+  <div class="flex flex-col text-left gap-4">
+    <h2 class="text-5xl font-semibold text-primary">CubeLift</h2>
+    <h3 class="section-title max-w-sm text-white">{t.product.hero_title}</h3>
+    <p class="paragraph max-w-sm text-white">{t.product.hero_description}</p>
+  </div>
+  <div class="mt-24 flex flex-row gap-4 items-center">
+    <a href={getPath("request", lang)} class="btn-request">{t.button.request}</a
+    >
+    <a href="/" class="text-primary font-bold cursor-pointer">
+      {t.specification_show}</a
+    >
+  </div>
+</section>
+<section id="section-1" class="bg-white relative px-6 py-16 lg:px-18 lg:py-24 lg:min-h-[660px]">
+  <div class="flex flex-col justify-start items-center gap-8 max-w-3xl mx-auto lg:mx-0 lg:items-start">
+    <h3 class="section-title text-black">{t.product.section_1_title}</h3>
+    <p class="paragraph text-black">{t.product.section_1_paragraph_1}</p>
+    <p class="paragraph text-black">{t.product.section_1_paragraph_2}</p>
+    <div class="w-full mt-8 lg:hidden">
+      <Image src={productImg1} alt="Home Image 1" class="w-full h-auto object-contain" />
+    </div>
+  </div>
+  <div class="hidden lg:flex flex-col gap-12 absolute -top-24 right-24">
+    <Image src={productImg1} alt="Home Image 1" class="w-lg" />
+    <Image src={productImg2} alt="Home Image 1" class="w-lg" />
+  </div>
+</section>
+<section
+  id="advantages"
+  class="bg-black flex flex-col justify-center items-center gap-8 p-18"
+>
+  <h3
+    class="section-title text-white max-w-2xl text-center text-pretty uppercase"
+  >
+    {t.advantages.product_title}
+  </h3>
+  <div class="flex flex-wrap gap-8 justify-center">
+    {advantageItems.map((item) => <AdvantageItem {...item} />)}
+  </div>
+</section>
+<section id="specifications" class="flex flex-col bg-primary p-18">
+  <div class="flex flex-col flex-1 items-start justify-center gap-8 relative">
+    <h3 class="section-title text-black max-w-2xl text-pretty uppercase">
+      {t.specifications.title}
+    </h3>
+    <p class="paragraph text-black max-w-xl text-pretty">
+      {t.specifications.description}
+    </p>
+    <ul class="grid grid-cols-1 md:grid-cols-2 gap-12">
+      {
+        specifications.map((s, index) => (
+          <li class="flex flex-col gap-6">
+            <div class="flex items-center gap-3 mb-2">
+              <span class="w-2.5 h-2.5 bg-black shrink-0" />
+              <span class="text-black font-bold uppercase text-xl">
+                {s.title}
+              </span>
+            </div>
+            <ul class="flex flex-col gap-2">
+              {s.items.map((i) => (
+                <li class="flex items-center gap-2 text-black">
+                  <span class="w-1.5 h-1.5 rounded-full bg-black shrink-0" />
+                  <span class="font-light text-lg">{i}</span>
+                </li>
+              ))}
+            </ul>
+            {index === specifications.length - 1 && (
+              <a href={"#"} class="btn-download">
+                {t.button.download}
+              </a>
+            )}
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+<section
+  id="section-2"
+  class="flex flex-col px-6 py-12 lg:px-20 lg:py-24 bg-white gap-12 items-start justify-center w-full"
+>
+  <div class="flex flex-col gap-4 max-w-xl">
+    <h3 class="section-title text-black text-3xl md:text-4xl">
+      {t.product.section_2_title}
+    </h3>
+    <p
+      class="paragraph text-black text-base md:text-lg text-pretty leading-relaxed"
+    >
+      {t.product.section_2_paragraph_1}
+    </p>
+  </div>
+  <div class="flex flex-col md:flex-row flex-wrap gap-6 w-full">
+    {
+      stepsInstallation.map((item, index) => (
+        <div class="flex flex-col gap-4 p-4 text-black w-full md:max-w-52">
+          <div class="flex flex-row gap-2 items-center">
+            <div class="aspect-square h-10 border-primary border-2 flex justify-center items-center text-primary font-bold">
+              {index + 1}
+            </div>
+            <svg
+              width="150"
+              height="60"
+              viewBox="0 0 300 60"
+              xmlns="http://www.w3.org/2000/svg"
+              class={`stroke-primary ${index === stepsInstallation.length - 1 ? "opacity-0" : ""}`}
+            >
+              <line
+                x1="20"
+                y1="30"
+                x2="230"
+                y2="30"
+                stroke-width="4"
+                class="stroke-primary"
+              />
+
+              <polygon points="250,30 230,20 230,40" class="fill-primary" />
+            </svg>
+          </div>
+          <h4 class="text-xl font-bold">{item.title}</h4>
+          <p class="text-base font-light">{item.paragraph}</p>
+        </div>
+      ))
+    }
+  </div>
+</section>
+<section
+  id="section-3"
+  class="flex flex-col px-18 py-24 bg-cover bg-black gap-8 items-center justify-center"
+>
+  <h3
+    class="section-title text-white text-3xl md:text-4xl max-w-xl text-center uppercase"
+  >
+    {t.product.section_3_title}
+  </h3>
+  <div class="flex flex-col max-w-2xl justify-center items-center text-center">
+    <p class="paragraph text-white text-lg font-light md:text-lg text-clip">
+      {t.product.section_3_paragraph_1}
+    </p>
+    <p class="paragraph text-white text-lg font-light md:text-lg text-clip">
+      {t.product.section_3_paragraph_2}
+    </p>
+  </div>
+</section>
+<section id="slider" class="flex flex-col py-12 h-screen">
+  <FullImageSlider images={sliderImages} />
+</section>
+<section
+  id="faqs"
+  class="flex flex-col md:flex-row justify-start  gap-12 px-18 py-24 "
+>
+  <h3
+    class="section-title text-black text-3xl md:text-4xl max-w-64 text-center uppercase"
+  >
+    {t.faqs.title}
+  </h3>
+  <div class="flex flex-col gap-4 w-full">
+    {
+      faqs.map((item) => (
+        <div class="flex flex-col gap-2">
+          <div class="flex flex-row border-b border-primary w-full gap-8 justify-start items-center pb-1">
+            <div class="bg-primary aspect-square h-3"/>  
+            <p class="text-black text-lg uppercase">{item.question}</p>
+          </div>
+          <p class="text-black text-lg font-light pl-12">{item.answer}</p>
+        </div>
+      ))
+    }
+  </div>
+</section>
+<RequestFooter lang={lang} />
