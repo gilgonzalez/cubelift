@@ -1,6 +1,7 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import sitemap from "@astrojs/sitemap";
+import vercel from '@astrojs/vercel';
 
 import tailwindcss from '@tailwindcss/vite';
 
@@ -10,6 +11,7 @@ export default defineConfig({
     plugins: [tailwindcss()]
   },
   output: "server",
+  adapter: vercel(),
   integrations: [
     sitemap({
       i18n: {
