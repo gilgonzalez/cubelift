@@ -30,7 +30,7 @@ const { images } = Astro.props;
     <div class="dots flex gap-3">
       {images.map((_, index) => (
         <button 
-          class="dot w-3 h-3 rounded-full transition-colors duration-300 data-[active=true]:bg-[var(--color-primary)] data-[active=false]:bg-gray-200 data-[active=false]:hover:bg-gray-300" 
+          class="dot w-3 h-3 rounded-full transition-colors duration-300 data-[active=true]:bg-primary data-[active=false]:bg-gray-200 data-[active=false]:hover:bg-gray-300" 
           data-index={index}
           data-active={index === 0 ? 'true' : 'false'}
           aria-label={`Go to slide ${index + 1}`}
