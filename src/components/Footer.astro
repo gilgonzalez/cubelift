@@ -1,8 +1,8 @@
 ---
-import { getPath, getTranslations } from "../i18n/utils";
-import Facebook from "./Facebook.astro";
-import Instagram from "./Instagram.astro";
-import Youtube from "./Youtube.astro";
+import { getPath, getTranslations } from "@i18n/utils";
+import Facebook from "@components/Facebook.astro";
+import Instagram from "@components/Instagram.astro";
+import Youtube from "@components/Youtube.astro";
 
 const { lang } = Astro.props;
 const t = getTranslations(lang);

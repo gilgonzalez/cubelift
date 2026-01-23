@@ -1,9 +1,7 @@
 ---
 const { lang = "es", url } = Astro.props;
----
 
-<script type="application/ld+json">
-{JSON.stringify({
+const schema = {
   "@context": "https://schema.org",
   "@type": "Service",
   "@id": `${url}#installation-service`,
@@ -19,6 +17,7 @@ const { lang = "es", url } = Astro.props;
     "@type": "Place",
     name: "Worldwide",
   },
-})
-}
-</script>
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />

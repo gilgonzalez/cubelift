@@ -1,8 +1,8 @@
 ---
 import { Image } from "astro:assets";
-import img from "../assets/blog/blog-img-1.jpg";
+import img from "@assets/blog/blog-img-1.jpg";
 
-import { getTranslations } from "../i18n/utils";
+import { getTranslations } from "@i18n/utils";
 const { lang } = Astro.props;
 const t = getTranslations(lang);
 const title = "La importancia de contar con un ascensor en casa."

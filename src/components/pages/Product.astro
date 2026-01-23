@@ -1,12 +1,12 @@
 ---
 import { Image } from "astro:assets";
-import productImg1 from "../assets/product/product-img-1.png";
-import productImg2 from "../assets/product/product-img-2.png";
-import productImg3 from "../assets/product/product-bg-1.png";
-import RequestFooter from "./RequestFooter.astro";
-import { getPath, getTranslations } from "../i18n/utils";
-import AdvantageItem from "./AdvantageItem.astro";
-import FullImageSlider from "./FullImageSlider.astro";
+import productImg1 from "@assets/product/product-img-1.png";
+import productImg2 from "@assets/product/product-img-2.png";
+import productImg3 from "@assets/product/product-bg-1.png";
+import RequestFooter from "@components/RequestFooter.astro";
+import { getPath, getTranslations } from "@i18n/utils";
+import AdvantageItem from "@components/AdvantageItem.astro";
+import FullImageSlider from "@components/FullImageSlider.astro";
 
 interface Props {
   lang: "en" | "es"

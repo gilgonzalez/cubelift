@@ -1,9 +1,7 @@
 ---
 const { lang = "es", url } = Astro.props;
----
 
-<script type="application/ld+json">
-{JSON.stringify({
+const schema = {
   "@context": "https://schema.org",
   "@type": "Product",
   "@id": `${url}#vacuum-lift`,
@@ -24,6 +22,7 @@ const { lang = "es", url } = Astro.props;
     name: "Vacuum Lift International",
   },
   category: "Elevator",
-})
-}
-</script>
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />

@@ -1,8 +1,8 @@
 ---
-import { getTranslations } from '../i18n/utils'
-import Facebook from './Facebook.astro';
-import Instagram from './Instagram.astro';
-import Youtube from './Youtube.astro';
+import { getTranslations } from "@i18n/utils";
+import Facebook from "@components/Facebook.astro";
+import Instagram from "@components/Instagram.astro";
+import Youtube from "@components/Youtube.astro";
 
 interface Props {
   lang: "es" | "en"
@@ -12,7 +12,7 @@ const t = getTranslations(lang)
 ---
 
 <section class="bg-primary px-18 py-8 flex justify-start">
-  <h2 class="text-3xl sm:text-4xl md:text-5xl text-left text-black uppercase leading-tight md:leading-[4rem] max-w-72">{t.navbar.contact}</h2>
+  <h2 class="text-3xl sm:text-4xl md:text-5xl text-left text-black uppercase leading-tight md:leading-16 max-w-72">{t.navbar.contact}</h2>
 </section>
 
 <section class="flex flex-col md:flex-row gap-8 px-6 py-10 md:p-18">

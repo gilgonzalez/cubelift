@@ -1,7 +1,7 @@
 ---
-import { getPath, getTranslations } from "../i18n/utils";
-import { routes } from "../i18n/routes";
-import LanguageSelector from "./LanguageSelector.astro";
+import { getPath, getTranslations } from "@i18n/utils";
+import { routes } from "@i18n/routes";
+import LanguageSelector from "@components/LanguageSelector.astro";
 
 const { lang } = Astro.props;
 const t = getTranslations(lang);
