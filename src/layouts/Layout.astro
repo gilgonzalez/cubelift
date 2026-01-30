@@ -62,6 +62,49 @@ const url = canonical ?? Astro.url.href;
 		<SeoSchema lang={lang} url={url} />
   	<ProductSchema lang={lang} url={url} />
   	<ServiceSchema lang={lang} url={url} />
+    
+    <style is:global>
+      /* Base Animation Class */
+      .animate-on-scroll {
+        opacity: 0;
+        transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+        will-change: opacity, transform;
+      }
+
+      /* Animation Variants (Initial States) */
+      .animate-fade-up {
+        transform: translateY(30px);
+      }
+      
+      .animate-fade-down {
+        transform: translateY(-30px);
+      }
+      
+      .animate-fade-left {
+        transform: translateX(30px);
+      }
+      
+      .animate-fade-right {
+        transform: translateX(-30px);
+      }
+      
+      .animate-zoom-in {
+        transform: scale(0.95);
+      }
+
+      /* Visible State (Final) */
+      .animate-on-scroll.is-visible {
+        opacity: 1;
+        transform: translate(0) scale(1);
+      }
+
+      /* Stagger delays */
+      .delay-100 { transition-delay: 100ms; }
+      .delay-200 { transition-delay: 200ms; }
+      .delay-300 { transition-delay: 300ms; }
+      .delay-400 { transition-delay: 400ms; }
+      .delay-500 { transition-delay: 500ms; }
+    </style>
   </head>
 
   <body>
@@ -72,5 +115,136 @@ const url = canonical ?? Astro.url.href;
     </main>
 
     <Footer lang={lang} />
+
+    <script>
+      const initAnimations = () => {
+        const observerOptions = {
+          root: null,
+          rootMargin: '0px',
+          threshold: 0.15
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target); // Run once
+            }
+          });
+        }, observerOptions);
+
+        const elements = document.querySelectorAll('.animate-on-scroll');
+        elements.forEach(el => observer.observe(el));
+      };
+
+      // Run on initial load
+      initAnimations();
+
+      // Run on view transitions navigation
+      document.addEventListener('astro:page-load', initAnimations);
+
+      // Script for Parallax Background (Restored & Optimized)
+      const initParallax = () => {
+        if (window.innerWidth < 1024) return;
+
+        const elements = document.querySelectorAll('.bg-parallax');
+        if (!elements.length) return;
+
+        let ticking = false;
+
+        const updateParallax = () => {
+          const scrollTop = window.scrollY;
+          elements.forEach(el => {
+            const rect = el.getBoundingClientRect();
+            const elTop = rect.top + scrollTop;
+            // Parallax factor (0.5 = background moves at 50% speed of scroll)
+            const speed = 0.5;
+            const yPos = (scrollTop - elTop) * speed;
+            (el as HTMLElement).style.backgroundPosition = `center ${yPos}px`;
+          });
+          ticking = false;
+        };
+
+        const onScroll = () => {
+          if (!ticking) {
+            window.requestAnimationFrame(updateParallax);
+            ticking = true;
+          }
+        };
+
+        window.addEventListener('scroll', onScroll, { passive: true });
+        updateParallax(); // Initial position
+      };
+
+      // Run on load and view transitions
+      initParallax();
+      document.addEventListener('astro:page-load', initParallax);
+
+      // Script for Sticky Scroll Reveal (Specific Elements Only)
+      const initScrollReveal = () => {
+        // Only run on desktop to avoid UX issues on mobile
+        if (window.innerWidth < 1024) return;
+
+        const tracks = document.querySelectorAll('[data-scroll-track]');
+        
+        const handleScroll = () => {
+          tracks.forEach(track => {
+            const rect = track.getBoundingClientRect();
+            const items = track.querySelectorAll('.scroll-reveal-item');
+            if (items.length === 0) return;
+
+            // Calculate progress: 0 when top of section hits top of viewport, 1 when bottom hits bottom
+            const trackHeight = rect.height;
+            const viewportHeight = window.innerHeight;
+            const scrollDistance = trackHeight - viewportHeight;
+            
+            let progress = 0;
+            
+            if (rect.top <= 0) {
+               progress = Math.abs(rect.top) / scrollDistance;
+            } else {
+               progress = 0; // Not reached yet
+            }
+            
+            // Clamp progress
+            if (progress > 1) progress = 1;
+
+            items.forEach((item) => {
+               // Simple 0 to 1 progress for single item
+               // Apply styles based on progress
+               (item as HTMLElement).style.transition = 'none';
+
+               // Opacity: Fade in
+               let opacity = progress * 2; // Fade in faster (first 50%)
+               if (opacity > 1) opacity = 1;
+
+               // Movement: Parallax / Reveal effect
+               // Moves from 100px down to 0px
+               // Or if user wants "go up", maybe from 50px to -50px?
+               // User said "aparezca y vaya subiendo".
+               // So start at say +100px (down) and end at -100px (up)?
+               // Or just appear (0 to 1 opacity) and move up?
+               // Let's stick to the previous "elevator" effect but maybe smoother.
+               // Start: translateY(100px). End: translateY(0px).
+               // The user previously said "vaya subiendo".
+               // Let's try: Start at 100px. End at -50px.
+               const startY = 100;
+               const endY = -50;
+               const translateY = startY - (progress * (startY - endY));
+
+               (item as HTMLElement).style.opacity = opacity.toFixed(2);
+               (item as HTMLElement).style.transform = `translateY(${translateY}px)`;
+            });
+          });
+        };
+
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        handleScroll(); // Initial check
+      };
+
+      // Run on load and view transitions
+      initScrollReveal();
+      document.addEventListener('astro:page-load', initScrollReveal);
+    </script>
   </body>
 </html>

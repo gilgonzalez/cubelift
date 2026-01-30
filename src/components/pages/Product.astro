@@ -163,11 +163,11 @@ const faqs = [
 
 <section id="hero" class="product-hero">
   <div class="flex flex-col text-left gap-4">
-    <h2 class="text-5xl font-semibold text-primary">CubeLift</h2>
-    <h3 class="section-title max-w-sm text-white">{t.product.hero_title}</h3>
-    <p class="paragraph max-w-sm text-white">{t.product.hero_description}</p>
+    <h2 class="text-5xl font-semibold text-primary animate-on-scroll animate-fade-down">CubeLift</h2>
+    <h3 class="section-title max-w-sm text-white animate-on-scroll animate-fade-up delay-100">{t.product.hero_title}</h3>
+    <p class="paragraph max-w-sm text-white animate-on-scroll animate-fade-up delay-200">{t.product.hero_description}</p>
   </div>
-  <div class="mt-24 flex flex-row gap-4 items-center">
+  <div class="mt-24 flex flex-row gap-4 items-center animate-on-scroll animate-fade-up delay-300">
     <a href={getPath("request", lang)} class="btn-request">{t.button.request}</a
     >
     <a href="/" class="text-primary font-bold cursor-pointer">
@@ -177,16 +177,16 @@ const faqs = [
 </section>
 <section id="section-1" class="bg-white relative px-6 py-16 lg:px-18 lg:py-24 lg:min-h-[660px]">
   <div class="flex flex-col justify-start items-center gap-8 max-w-3xl mx-auto lg:mx-0 lg:items-start">
-    <h3 class="section-title text-black">{t.product.section_1_title}</h3>
-    <p class="paragraph text-black">{t.product.section_1_paragraph_1}</p>
-    <p class="paragraph text-black">{t.product.section_1_paragraph_2}</p>
-    <div class="w-full mt-8 lg:hidden">
+    <h3 class="section-title text-black animate-on-scroll animate-fade-right">{t.product.section_1_title}</h3>
+    <p class="paragraph text-black animate-on-scroll animate-fade-right delay-100">{t.product.section_1_paragraph_1}</p>
+    <p class="paragraph text-black animate-on-scroll animate-fade-right delay-200">{t.product.section_1_paragraph_2}</p>
+    <div class="w-full mt-8 lg:hidden animate-on-scroll animate-fade-left delay-300">
       <Image src={productImg1} alt="Home Image 1" class="w-full h-auto object-contain" />
     </div>
   </div>
   <div class="hidden lg:flex flex-col gap-12 absolute -top-24 right-24">
-    <Image src={productImg1} alt="Home Image 1" class="w-lg" />
-    <Image src={productImg2} alt="Home Image 1" class="w-lg" />
+    <Image src={productImg1} alt="Home Image 1" class="w-lg animate-on-scroll animate-fade-left delay-300" />
+    <Image src={productImg2} alt="Home Image 1" class="w-lg animate-on-scroll animate-fade-left delay-400" />
   </div>
 </section>
 <section
@@ -194,61 +194,80 @@ const faqs = [
   class="bg-black flex flex-col justify-center items-center gap-8 p-18"
 >
   <h3
-    class="section-title text-white max-w-2xl text-center text-pretty uppercase"
+    class="section-title text-white max-w-2xl text-center text-pretty uppercase animate-on-scroll animate-fade-up"
   >
     {t.advantages.product_title}
   </h3>
   <div class="flex flex-wrap gap-8 justify-center">
-    {advantageItems.map((item) => <AdvantageItem {...item} />)}
+    {
+      advantageItems.map((item, index) => (
+        <div class="animate-on-scroll animate-fade-up" style={`transition-delay: ${index * 100}ms`}>
+           <AdvantageItem {...item} />
+        </div>
+      ))
+    }
   </div>
 </section>
-<section id="specifications" class="flex flex-col bg-primary p-18">
-  <div class="flex flex-col flex-1 items-start justify-center gap-8 relative">
-    <h3 class="section-title text-black max-w-2xl text-pretty uppercase">
+
+<!-- Specifications Section -->
+<section
+  id="specifications"
+  class="bg-primary p-18 flex flex-col justify-center items-center"
+>
+  <div class="flex flex-col flex-1 items-start justify-center gap-8 w-full max-w-7xl mx-auto">
+    <h3
+      class="section-title text-black max-w-2xl text-pretty uppercase animate-on-scroll animate-fade-right"
+    >
       {t.specifications.title}
     </h3>
-    <p class="paragraph text-black max-w-xl text-pretty">
+    <p
+      class="paragraph text-black max-w-xl text-pretty animate-on-scroll animate-fade-right delay-100"
+    >
       {t.specifications.description}
     </p>
-    <ul class="grid grid-cols-1 md:grid-cols-2 gap-12">
+    <ul class="grid grid-cols-1 md:grid-cols-2 gap-12 w-full">
       {
         specifications.map((s, index) => (
-          <li class="flex flex-col gap-6">
-            <div class="flex items-center gap-3 mb-2">
-              <span class="w-2.5 h-2.5 bg-black shrink-0" />
-              <span class="text-black font-bold uppercase text-xl">
-                {s.title}
-              </span>
-            </div>
-            <ul class="flex flex-col gap-2">
-              {s.items.map((i) => (
-                <li class="flex items-center gap-2 text-black">
-                  <span class="w-1.5 h-1.5 rounded-full bg-black shrink-0" />
-                  <span class="font-light text-lg">{i}</span>
-                </li>
-              ))}
-            </ul>
-            {index === specifications.length - 1 && (
-              <a href={"#"} class="btn-download">
-                {t.button.download}
-              </a>
-            )}
+          <li
+            class="flex flex-col gap-6 animate-on-scroll animate-fade-up"
+            style={`transition-delay: ${index * 100}ms`}
+          >
+             <div class="flex items-center gap-3 mb-2">
+               <span class="w-2.5 h-2.5 bg-black shrink-0" />
+               <span class="text-black font-bold uppercase text-xl">
+                 {s.title}
+               </span>
+             </div>
+             <ul class="flex flex-col gap-2">
+               {s.items.map((i) => (
+                 <li class="flex items-center gap-2 text-black">
+                   <span class="w-1.5 h-1.5 rounded-full bg-black shrink-0" />
+                   <span class="font-light text-lg">{i}</span>
+                 </li>
+               ))}
+             </ul>
+             {index === specifications.length - 1 && (
+               <a href={"#"} class="btn-download mt-4 inline-block">
+                 {t.button.download}
+               </a>
+             )}
           </li>
         ))
       }
     </ul>
   </div>
 </section>
+
 <section
   id="section-2"
-  class="flex flex-col px-6 py-12 lg:px-20 lg:py-24 bg-white gap-12 items-start justify-center w-full"
+  class="flex flex-col px-6 py-12 lg:px-20 lg:pt-24 lg:pb-12 bg-white gap-12 items-start justify-center w-full"
 >
   <div class="flex flex-col gap-4 max-w-xl">
-    <h3 class="section-title text-black text-3xl md:text-4xl">
+    <h3 class="section-title text-black text-3xl md:text-4xl animate-on-scroll animate-fade-right">
       {t.product.section_2_title}
     </h3>
     <p
-      class="paragraph text-black text-base md:text-lg text-pretty leading-relaxed"
+      class="paragraph text-black text-base md:text-lg text-pretty leading-relaxed animate-on-scroll animate-fade-right delay-100"
     >
       {t.product.section_2_paragraph_1}
     </p>
@@ -256,7 +275,7 @@ const faqs = [
   <div class="flex flex-col md:flex-row flex-wrap gap-6 w-full">
     {
       stepsInstallation.map((item, index) => (
-        <div class="flex flex-col gap-4 p-4 text-black w-full md:max-w-52">
+        <div class="flex flex-col gap-4 p-4 text-black w-full md:max-w-52 animate-on-scroll animate-fade-up" style={`transition-delay: ${index * 100}ms`}>
           <div class="flex flex-row gap-2 items-center">
             <div class="aspect-square h-10 border-primary border-2 flex justify-center items-center text-primary font-bold">
               {index + 1}
@@ -289,23 +308,23 @@ const faqs = [
 </section>
 <section
   id="section-3"
-  class="flex flex-col px-18 py-24 bg-cover bg-black gap-8 items-center justify-center"
+  class="flex flex-col px-18 py-12 bg-cover bg-parallax gap-8 items-center justify-center"
 >
   <h3
-    class="section-title text-white text-3xl md:text-4xl max-w-xl text-center uppercase"
+    class="section-title text-black text-3xl md:text-4xl max-w-xl text-center uppercase animate-on-scroll animate-fade-down"
   >
     {t.product.section_3_title}
   </h3>
   <div class="flex flex-col max-w-2xl justify-center items-center text-center">
-    <p class="paragraph text-white text-lg font-light md:text-lg text-clip">
+    <p class="paragraph text-black text-lg font-light md:text-lg text-clip animate-on-scroll animate-fade-up delay-100">
       {t.product.section_3_paragraph_1}
     </p>
-    <p class="paragraph text-white text-lg font-light md:text-lg text-clip">
+    <p class="paragraph text-black text-lg font-light md:text-lg text-clip animate-on-scroll animate-fade-up delay-200">
       {t.product.section_3_paragraph_2}
     </p>
   </div>
 </section>
-<section id="slider" class="flex flex-col py-12 h-screen">
+<section id="slider" class="flex flex-col pb-12 h-screen animate-on-scroll animate-zoom-in">
   <FullImageSlider images={sliderImages} />
 </section>
 <section
@@ -313,14 +332,14 @@ const faqs = [
   class="flex flex-col md:flex-row justify-start  gap-12 px-18 py-24 "
 >
   <h3
-    class="section-title text-black text-3xl md:text-4xl max-w-64 text-center uppercase"
+    class="section-title text-black text-3xl md:text-4xl max-w-64 text-center uppercase animate-on-scroll animate-fade-right"
   >
     {t.faqs.title}
   </h3>
   <div class="flex flex-col gap-4 w-full">
     {
-      faqs.map((item) => (
-        <div class="flex flex-col gap-2">
+      faqs.map((item, index) => (
+        <div class="flex flex-col gap-2 animate-on-scroll animate-fade-left" style={`transition-delay: ${(index % 5) * 100}ms`}>
           <div class="flex flex-row border-b border-primary w-full gap-8 justify-start items-center pb-1">
             <div class="bg-primary aspect-square h-3"/>  
             <p class="text-black text-lg uppercase">{item.question}</p>

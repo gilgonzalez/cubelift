@@ -19,26 +19,26 @@ const t = getTranslations(lang);
   <Image
     src={Logo}
     alt={"CubeLifts logo"}
-    class="w-44 h-auto"
+    class="w-44 h-auto animate-on-scroll animate-zoom-in"
   />
 </section>
 <section id="section-1" class="flex flex-col justify-center items-center p-18 gap-12 bg-[linear-gradient(to_bottom,var(--color-primary)_70%,white_70%)]">
-  <p class="text-center text-clip text-lg md:text-xl lg:text-2xl xl:text-3xl font-light max-w-5xl">{t.about.section_1_paragraph}</p>
+  <p class="text-center text-clip text-lg md:text-xl lg:text-2xl xl:text-3xl font-light max-w-5xl animate-on-scroll animate-fade-up">{t.about.section_1_paragraph}</p>
   <div class="flex flex-col xl:flex-row gap-8 ">
-    <Image src={img1} alt={"CubeLifts img 1"} class="w-auto object-cover" />
-    <Image src={img2} alt={"CubeLifts img 2"} class="w-auto object-cover" />
+    <Image src={img1} alt={"CubeLifts img 1"} class="w-auto object-cover animate-on-scroll animate-fade-right delay-100" />
+    <Image src={img2} alt={"CubeLifts img 2"} class="w-auto object-cover animate-on-scroll animate-fade-left delay-200" />
   </div>
 </section>
 <section id="our-mission" class="bg-white p-18 flex flex-col gap-12 justify-center items-center">
-  <h3 class="text-4xl text-center capitalize">{t.about.our_mission}</h3>
-  <p class="font-light text-center max-w-4xl text-xl">{t.about.our_mission_paragraph_1}</p>
-  <h2 class="text-5xl max-w-3xl leading-16 text-center capitalize">{t.about.company_name}</h2>
-  <h2 class="text-xl font-bold text-center capitalize">{t.about.company_acronym}</h2>
-  <p class="font-light text-center max-w-4xl text-xl">{t.about.our_mission_paragraph_2}</p>
-  <p class="font-light text-center max-w-4xl text-xl">{t.about.our_mission_paragraph_3}</p>
-  <Image src={img3} alt={"CubeLifts img 3"} class="w-auto object-cover" />
-  <p class="font-light text-center text-balance max-w-4xl text-xl">{t.about.our_mission_paragraph_4}</p>
-  <div class="flex flex-col xl:flex-row gap-8 justify-center items-center">
+  <h3 class="text-4xl text-center capitalize animate-on-scroll animate-fade-down">{t.about.our_mission}</h3>
+  <p class="font-light text-center max-w-4xl text-xl animate-on-scroll animate-fade-up delay-100">{t.about.our_mission_paragraph_1}</p>
+  <h2 class="text-5xl max-w-3xl leading-16 text-center capitalize animate-on-scroll animate-zoom-in delay-200">{t.about.company_name}</h2>
+  <h2 class="text-xl font-bold text-center capitalize animate-on-scroll animate-fade-up delay-300">{t.about.company_acronym}</h2>
+  <p class="font-light text-center max-w-4xl text-xl animate-on-scroll animate-fade-up delay-400">{t.about.our_mission_paragraph_2}</p>
+  <p class="font-light text-center max-w-4xl text-xl animate-on-scroll animate-fade-up delay-500">{t.about.our_mission_paragraph_3}</p>
+  <Image src={img3} alt={"CubeLifts img 3"} class="w-auto object-cover animate-on-scroll animate-zoom-in delay-200" />
+  <p class="font-light text-center text-balance max-w-4xl text-xl animate-on-scroll animate-fade-up">{t.about.our_mission_paragraph_4}</p>
+  <div class="flex flex-col xl:flex-row gap-8 justify-center items-center animate-on-scroll animate-fade-up delay-100">
     <a href="" class="btn-about">{t.about.buttons.policy_quality}</a>
     <a href="" class="btn-about">{t.about.buttons.quality_certificate}</a>
     <a href="" class="btn-about">{t.about.buttons.certificate}</a>

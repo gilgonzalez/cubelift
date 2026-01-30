@@ -9,10 +9,10 @@ const { lang } = Astro.props;
 const t = getTranslations(lang);
 ---
 <section class="bg-primary px-18 py-8 flex justify-start">
-  <h2 class="text-5xl text-left text-black uppercase leading-16 max-w-72">{t.navbar.request}</h2>
+  <h2 class="text-5xl text-left text-black uppercase leading-16 max-w-72 animate-on-scroll">{t.navbar.request}</h2>
 </section>
 <section class="bg-white p-18">
-  <form action="" class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+  <form action="" class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 animate-on-scroll delay-100">
     <input type="text" placeholder={`${t.form.name} *`} class="input-light" />
     <input type="text" placeholder={`${t.form.surname} *`} class="input-light" />
     <input type="text" placeholder={`${t.form.email} *`} class="input-light" />

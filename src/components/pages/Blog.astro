@@ -10,10 +10,10 @@ const t = getTranslations(lang)
 ---
 
 <section class="bg-primary px-6 py-6 md:px-18 md:py-8 flex justify-start">
-  <h2 class="text-3xl sm:text-4xl md:text-5xl text-left text-black uppercase leading-tight md:leading-16 max-w-72">{t.navbar.blog}</h2>
+  <h2 class="text-3xl sm:text-4xl md:text-5xl text-left text-black uppercase leading-tight md:leading-16 max-w-72 animate-on-scroll">{t.navbar.blog}</h2>
 </section>
 <section class="flex flex-col gap-8 px-6 py-10 md:px-18 md:py-16">
-  <div class="flex flex-col gap-4 md:flex-row md:items-center">
+  <div class="flex flex-col gap-4 md:flex-row md:items-center animate-on-scroll delay-100">
     <input type="text" class="input-search flex-1" placeholder={t.form.search} />
     <div class="flex flex-row gap-2 flex-1 md:justify-end">
       <button class="btn-blog-filter">{t.form.date}</button>
@@ -23,7 +23,9 @@ const t = getTranslations(lang)
   <ul class="flex flex-col gap-8">
     {
       Array.from({ length: 10 }).map((_, index) => (
-        <BlogItem key={index} lang={lang} />
+        <div class="animate-on-scroll" style={`transition-delay: ${(index % 5) * 100}ms`}>
+          <BlogItem key={index} lang={lang} />
+        </div>
       ))
     }
   </ul>

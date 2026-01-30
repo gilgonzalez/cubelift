@@ -33,16 +33,16 @@ const date = "8 Marzo 2024"
   <Image
     src={img}
     alt={title}
-    class="w-full max-w-5xl object-cover aspect-video"
+    class="w-full max-w-5xl object-cover aspect-video animate-on-scroll"
     transition:name={`blog-image-${slug}`}
   />
   <div class="flex flex-col justify-between w-full max-w-2xl gap-4">
-    <p class="text-sm text-gray-500 font-light">{date}</p>
-    <h3 class="text-2xl md:text-3xl font-bold text-pretty text-black max-w-96 flex-1 flex justify-center items-center">{title}</h3>
-    <p class="text-sm md:text-base font-light text-gray-500 flex-1" set:html={content} />
+    <p class="text-sm text-gray-500 font-light animate-on-scroll delay-100">{date}</p>
+    <h3 class="text-2xl md:text-3xl font-bold text-pretty text-black max-w-96 flex-1 flex justify-center items-center animate-on-scroll delay-100">{title}</h3>
+    <div class="text-sm md:text-base font-light text-gray-500 flex-1 animate-on-scroll delay-200" set:html={content} />
     <a
       href={`/${lang}/blog`}
-      class="inline-flex items-center gap-2 text-sm font-light text-gray-500 mt-4 cursor-pointer hover:text-black"
+      class="inline-flex items-center gap-2 text-sm font-light text-gray-500 mt-4 cursor-pointer hover:text-black animate-on-scroll delay-300"
     >
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-4 h-4">
         <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
