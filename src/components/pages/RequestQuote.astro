@@ -1,6 +1,8 @@
 ---
 import { getTranslations } from "@i18n/utils";
 
+import { locations } from "@constants/country";
+
 interface Props {
   lang: "es" | "en";
 }
@@ -12,68 +14,183 @@ const t = getTranslations(lang);
   <h2 class="text-5xl text-left text-black uppercase leading-16 max-w-72 animate-on-scroll">{t.navbar.request}</h2>
 </section>
 <section class="bg-white p-18">
-  <form action="" class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 animate-on-scroll delay-100">
-    <input type="text" placeholder={`${t.form.name} *`} class="input-light" />
-    <input type="text" placeholder={`${t.form.surname} *`} class="input-light" />
-    <input type="text" placeholder={`${t.form.email} *`} class="input-light" />
-    <input type="text" placeholder={`${t.form.phone} *`} class="input-light" />
-    <input type="text" placeholder={`${t.form.country} *`} class="input-light" />
-    <input type="text" placeholder={`${t.form.province} *`} class="input-light" />
-
-    <fieldset class="md:col-span-1 flex flex-col gap-4">
-      <legend class="text-lg font-light text-black mb-4">{t.form.installation_type.label}</legend>
-      <label class="flex items-center gap-2 text-sm text-black">
-        <input type="radio" name="installation_type" value="item_1" class="radio-input-light" />
-        <span class="text-base font-light">{t.form.installation_type.item_1}</span>
-      </label>
-      <label class="flex items-center gap-2 text-sm text-black">
-        <input type="radio" name="installation_type" value="item_2" class="radio-input-light" />
-        <span class="text-base font-light">{t.form.installation_type.item_2}</span>
-      </label>
-      <label class="flex items-center gap-2 text-sm text-black">
-        <input type="radio" name="installation_type" value="item_3" class="radio-input-light" />
-        <span class="text-base font-light">{t.form.installation_type.item_3}</span>
-      </label>
-      <label class="flex items-center gap-2 text-sm text-black">
-        <input type="radio" name="installation_type" value="item_4" class="radio-input-light" />
-        <span class="text-base font-light">{t.form.installation_type.item_4}</span>
-      </label>
-      <label class="flex items-center gap-2 text-sm text-black">
-        <input type="radio" name="installation_type" value="item_5" class="radio-input-light" />
-        <span class="text-base font-light">{t.form.installation_type.item_5}</span>
-      </label>
+  <form action="" class="flex flex-col gap-10 animate-on-scroll delay-100">
+    
+    <!-- 1. Datos Personales -->
+    <fieldset class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <legend class="text-2xl font-light text-black uppercase mb-6 border-b border-black/10 w-full pb-2">{t.form.sections.personal}</legend>
+      <input type="text" name="name" placeholder={`${t.form.name} *`} class="input-light" required />
+      <input type="text" name="surname" placeholder={`${t.form.surname} *`} class="input-light" required />
+      <select name="contact_type" class="input-light text-black/60 md:col-span-2" required>
+        <option value="" disabled selected>{t.form.contact_type.label} *</option>
+        <option value="Cliente particular">{t.form.contact_type.individual}</option>
+        <option value="Empresa">{t.form.contact_type.company}</option>
+        <option value="Arquitecto/Decorador">{t.form.contact_type.architect}</option>
+        <option value="Administrador de fincas">{t.form.contact_type.admin}</option>
+      </select>
     </fieldset>
 
-    <fieldset class="md:col-span-1 flex flex-col gap-4">
-      <legend class="text-lg font-light text-black mb-4">{t.form.floor_quantity}</legend>
-      <label class="flex items-center gap-2 text-sm text-black">
-        <input type="radio" name="floor_quantity" value="1" class="radio-input-light" />
-        <span class="text-base font-light">1</span>
-      </label>
-      <label class="flex items-center gap-2 text-sm text-black">
-        <input type="radio" name="floor_quantity" value="2" class="radio-input-light" />
-        <span class="text-base font-light">2</span>
-      </label>
-      <label class="flex items-center gap-2 text-sm text-black">
-        <input type="radio" name="floor_quantity" value="3" class="radio-input-light" />
-        <span class="text-base font-light">3</span>
-      </label>
-      <label class="flex items-center gap-2 text-sm text-black">
-        <input type="radio" name="floor_quantity" value="4" class="radio-input-light" />
-        <span class="text-base font-light">4</span>
-      </label>
-      <label class="flex items-center gap-2 text-sm text-black">
-        <input type="radio" name="floor_quantity" value=">5" class="radio-input-light" />
-        <span class="text-base font-light">{t.form.more_than_5}</span>
-      </label>
+    <!-- 2. Datos de Contacto -->
+    <fieldset class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <legend class="text-2xl font-light text-black uppercase mb-6 border-b border-black/10 w-full pb-2">{t.form.sections.contact}</legend>
+      <input type="email" name="email" placeholder={`${t.form.email} *`} class="input-light" required />
+      <input type="tel" name="phone" placeholder={`${t.form.phone} *`} class="input-light" required />
+      <input type="tel" name="mobile" placeholder={`${t.form.mobile}`} class="input-light" />
+      <select name="contact_preference" class="input-light text-black/60" required>
+        <option value="" disabled selected>{t.form.contact_preference.label} *</option>
+        <option value="Móvil">{t.form.contact_preference.mobile}</option>
+        <option value="Email">{t.form.contact_preference.email}</option>
+        <option value="Teléfono">{t.form.contact_preference.phone}</option>
+      </select>
     </fieldset>
-    <input type="text" placeholder={`${t.form.message} *`} class="input-light md:col-span-2" />
-    <div class="md:col-span-2">
-      <label class="flex items-center gap-2 text-sm text-black">
-        <input type="checkbox" name="legal_notice" class="checkbox-input-light" />
-        <span class="text-base font-light">{t.form.read_accept} <span class="underline">{t.form.legal_notice}</span> {t.form.and} <span class="underline">{t.form.privacy_policy}</span></span>
+
+    <!-- 3. Ubicación del Proyecto -->
+    <fieldset class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <legend class="text-2xl font-light text-black uppercase mb-6 border-b border-black/10 w-full pb-2">{t.form.sections.location}</legend>
+      <input type="text" name="street" placeholder={`${t.form.street}`} class="input-light md:col-span-2" />
+      <input type="text" name="city" placeholder={`${t.form.city} *`} class="input-light" required />
+      <input type="text" name="zip_code" placeholder={`${t.form.zip_code} *`} class="input-light" required />
+      
+      <select name="country" id="country-select" class="input-light text-black/60" required>
+        <option value="" disabled selected>{t.form.country} *</option>
+        {locations.map((loc) => (
+          <option value={loc.country}>{loc.country}</option>
+        ))}
+      </select>
+
+      <select name="province" id="province-select" class="input-light text-black/60" required disabled>
+        <option value="" disabled selected>{t.form.province} *</option>
+      </select>
+    </fieldset>
+
+    <!-- 4. Detalles del Proyecto -->
+    <fieldset class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <legend class="text-2xl font-light text-black uppercase mb-6 border-b border-black/10 w-full pb-2">{t.form.sections.details}</legend>
+      
+      <!-- Model set to CubeLift (hidden) -->
+      <input type="hidden" name="model" value="CubeLift" />
+
+      <div class="flex flex-col gap-4">
+        <span class="text-lg font-medium text-black">{t.form.installation_type.label}</span>
+        <div class="flex flex-col gap-3">
+          <label class="flex items-center gap-3 cursor-pointer">
+            <input type="radio" name="instalation_type" value="Vivienda particular (Chalet, unifamiliar, adosado)" class="radio-input-light" />
+            <span class="text-base font-light">{t.form.installation_type.item_1}</span>
+          </label>
+          <label class="flex items-center gap-3 cursor-pointer">
+            <input type="radio" name="instalation_type" value="Piso dúplex (ático, penthouse, etc.)" class="radio-input-light" />
+            <span class="text-base font-light">{t.form.installation_type.item_2}</span>
+          </label>
+          <label class="flex items-center gap-3 cursor-pointer">
+            <input type="radio" name="instalation_type" value="Comunidad de Propietarios" class="radio-input-light" />
+            <span class="text-base font-light">{t.form.installation_type.item_3}</span>
+          </label>
+          <label class="flex items-center gap-3 cursor-pointer">
+            <input type="radio" name="instalation_type" value="Local Comercial" class="radio-input-light" />
+            <span class="text-base font-light">{t.form.installation_type.item_4}</span>
+          </label>
+          <label class="flex items-center gap-3 cursor-pointer">
+            <input type="radio" name="instalation_type" value="Otro tipo de vivienda" class="radio-input-light" />
+            <span class="text-base font-light">{t.form.installation_type.item_5}</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="flex flex-col gap-4">
+        <span class="text-lg font-medium text-black">{t.form.floor_quantity}</span>
+        <div class="flex flex-wrap gap-4">
+          {[1, 2, 3, 4].map(num => (
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="radio" name="floor_number" value={num} class="radio-input-light" />
+              <span class="text-base font-light">{num}</span>
+            </label>
+          ))}
+          <label class="flex items-center gap-2 cursor-pointer">
+            <input type="radio" name="floor_number" value=">5" class="radio-input-light" />
+            <span class="text-base font-light">{t.form.more_than_5}</span>
+          </label>
+        </div>
+      </div>
+
+      <textarea name="message" rows="4" placeholder={`${t.form.message} *`} class="input-light md:col-span-2 pt-3 resize-none"></textarea>
+    </fieldset>
+    
+    <!-- Hidden Fields -->
+    <input type="hidden" name="language" id="language" />
+    <input type="hidden" name="gclid" id="gclid" />
+    <input type="hidden" name="gclsrc" id="gclsrc" />
+    <input type="hidden" name="wbraid" id="wbraid" />
+    <input type="hidden" name="gbraid" id="gbraid" />
+    <input type="hidden" name="utm_source" id="utm_source" />
+    <input type="hidden" name="utm_medium" id="utm_medium" />
+    <input type="hidden" name="utm_campaign" id="utm_campaign" />
+    <input type="hidden" name="utm_term" id="utm_term" />
+    <input type="hidden" name="utm_content" id="utm_content" />
+
+    <div class="flex flex-col gap-6 mt-4">
+      <label class="flex items-center gap-3 cursor-pointer">
+        <input type="checkbox" name="legal_notice" class="checkbox-input-light w-5 h-5" required />
+        <span class="text-base font-light">{t.form.read_accept} <a href="#" class="underline hover:text-primary transition-colors">{t.form.legal_notice}</a> {t.form.and} <a href="#" class="underline hover:text-primary transition-colors">{t.form.privacy_policy}</a></span>
       </label>
+      <button type="submit" class="btn-primary w-fit px-12 py-3 text-lg">{t.form.submit}</button>
     </div>
-    <button type="submit" class="btn-primary w-fit">{t.form.submit}</button>
   </form>
 </section>
+
+<script>
+  import { locations } from "@constants/country";
+
+  document.addEventListener('astro:page-load', () => {
+    // Country and Region Logic
+    const countrySelect = document.getElementById('country-select') as HTMLSelectElement;
+    const provinceSelect = document.getElementById('province-select') as HTMLSelectElement;
+
+    if (countrySelect && provinceSelect) {
+      countrySelect.addEventListener('change', (e) => {
+        const selectedCountry = (e.target as HTMLSelectElement).value;
+        const locationData = locations.find(loc => loc.country === selectedCountry);
+        
+        // Clear existing options
+        provinceSelect.innerHTML = '<option value="" disabled selected>Provincia *</option>'; // Reset with default option, translation handled via prop initially but static here is fine or we can pass it via data-attribute if strict i18n needed for the default option text after reset. Ideally just keep the first child.
+        // Actually better to preserve the first option text which might be translated.
+        // Let's re-read the initial placeholder text from a data attribute or just standard reset.
+        // For simplicity, we can just clear options > 0.
+        while (provinceSelect.options.length > 1) {
+          provinceSelect.remove(1);
+        }
+
+        if (locationData) {
+          provinceSelect.disabled = false;
+          locationData.regions.forEach(region => {
+            const option = document.createElement('option');
+            option.value = region;
+            option.textContent = region;
+            provinceSelect.appendChild(option);
+          });
+        } else {
+          provinceSelect.disabled = true;
+        }
+      });
+    }
+
+    // Populate Language
+    const langInput = document.getElementById('language') as HTMLInputElement;
+    if (langInput) {
+      langInput.value = navigator.language || 'es-ES';
+    }
+
+    // Populate URL Parameters
+    const params = new URLSearchParams(window.location.search);
+    const fields = [
+      'gclid', 'gclsrc', 'wbraid', 'gbraid',
+      'utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'
+    ];
+
+    fields.forEach(field => {
+      const input = document.getElementById(field) as HTMLInputElement;
+      if (input && params.has(field)) {
+        input.value = params.get(field) || '';
+      }
+    });
+  });
+</script>

@@ -194,6 +194,30 @@ export const t = {
     read_accept: "He leído y acepto el",
     country: "País",
     province: "Provincia",
+    mobile: "Móvil",
+    contact_preference: {
+      label: "Preferencia de contacto",
+      mobile: "Móvil",
+      email: "Email",
+      phone: "Teléfono fijo"
+    },
+    contact_type: {
+      label: "Tipo de cliente",
+      individual: "Cliente particular",
+      company: "Empresa",
+      architect: "Arquitecto/Decorador",
+      admin: "Administrador de fincas"
+    },
+    street: "Dirección",
+    city: "Ciudad/Población",
+    zip_code: "Código Postal",
+    model: {
+      label: "Modelo de interés",
+      pve30: "PVE30 (Unipersonal)",
+      pve37: "PVE37 (Dos personas)",
+      pve52: "PVE52 (Tres personas/Silla de ruedas)",
+      cube: "CubeLift (Cuadrado)"
+    },
     installation_type: {
       label: "Tipo de instalación",
       item_1: "Vivienda particular (Chalet, unifamiliar, adosado)",
@@ -205,7 +229,13 @@ export const t = {
     floor_quantity: "Cuántas plantas tiene su vivienda?",
     more_than_5: "Más de 5",
     order: "Ordenar",
-    date: "Fecha"
+    date: "Fecha",
+    sections: {
+      personal: "Datos Personales",
+      contact: "Datos de Contacto",
+      location: "Ubicación del Proyecto",
+      details: "Detalles del Proyecto"
+    }
   },
   title: "Ascensores de alta calidad",
   description: "Instalación y mantenimiento de ascensores",

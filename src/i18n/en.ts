@@ -213,6 +213,30 @@ export const t = {
     read_accept: "I have read and accept the",
     country: "Country",
     province: "Province",
+    mobile: "Mobile",
+    contact_preference: {
+      label: "Contact preference",
+      mobile: "Mobile",
+      email: "Email",
+      phone: "Landline"
+    },
+    contact_type: {
+      label: "Client type",
+      individual: "Individual",
+      company: "Company",
+      architect: "Architect/Decorator",
+      admin: "Property Administrator"
+    },
+    street: "Address",
+    city: "City/Town",
+    zip_code: "Zip Code",
+    model: {
+      label: "Model of interest",
+      pve30: "PVE30 (Single person)",
+      pve37: "PVE37 (Two people)",
+      pve52: "PVE52 (Three people/Wheelchair)",
+      cube: "CubeLift (Square)"
+    },
     search: "Search",
     installation_type: {
       label: "Installation type",
@@ -225,7 +249,13 @@ export const t = {
     floor_quantity: "How many floors does your home have?",
     more_than_5: "More than 5",
     order: "Order",
-    date: "Date"
+    date: "Date",
+    sections: {
+      personal: "Personal Details",
+      contact: "Contact Information",
+      location: "Project Location",
+      details: "Project Details"
+    }
   },
   title: "High quality lifts",
   description: "Lift installation and maintenance",
